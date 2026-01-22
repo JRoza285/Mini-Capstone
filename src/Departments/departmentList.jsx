@@ -13,3 +13,9 @@ export default function DepartmentList({ department }) {
 }
 
 function BookListItem({ department }) {
+    return (
+        <li classname= "department-item">
+            <Link to={"/department/" + department.id}>{department.name}</Link>
+        </li>
+    )
+}
