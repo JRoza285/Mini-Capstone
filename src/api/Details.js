@@ -44,4 +44,4 @@ export async function getDepartments() {
     };
 }
 
-export async function getDepaertmentId(id)
+export async function getDepartmentId(id)
