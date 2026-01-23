@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 
-const API = import.meta.env.VITE_API;
+const API = "http://localhost:3000";
 const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
