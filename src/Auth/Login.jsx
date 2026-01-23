@@ -9,9 +9,7 @@ export default function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
-    const tryLogin = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
+    const tryLogin = async (formData) => {
         setError(null);
 
         const email = formData.get("email");
@@ -28,7 +26,7 @@ export default function Login() {
     return (
         <>
             <h1>Log in to your account</h1>
-            <form onSubmit={tryLogin}>
+            <form action={tryLogin}>
                 <label>
                     Username
                     <input type="text" name="email" required />

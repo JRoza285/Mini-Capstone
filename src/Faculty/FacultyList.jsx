@@ -1,6 +1,6 @@
 // displays a list of faculty members from the database
 
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function FacultyList({ faculty }) {
     return (

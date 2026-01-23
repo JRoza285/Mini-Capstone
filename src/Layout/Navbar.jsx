@@ -9,8 +9,8 @@ export default function Navbar() {
     <header>
         <nav>
             <NavLink to="/home">Home</NavLink>
-            <NavLink to="/DepartmentLibrary">All Departments</NavLink>
-            <NavLink to="/FacultyLibrary">All Faculty</NavLink>
+            <NavLink to="/DepartmentLibrary">Departments</NavLink>
+            <NavLink to="/FacultyLibrary">Faculty</NavLink>
             {token ? <button onClick={logout}>Log Out</button> : <NavLink to="/login">Log In</NavLink>}
         </nav>
     </header>
