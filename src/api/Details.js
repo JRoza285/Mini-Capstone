@@ -44,4 +44,33 @@ export async function getDepartments() {
     };
 }
 
-export async function getDepaertmentId(id)
+export async function getDepaertmentId(id) {
+    try {
+        const response = await fetch(API + "/department/" + id);
+        const result = await response.json();
+        return result;
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}
+
+//returns account details to be rendered in a logged in account
+
+export async function accountDetails(token) {
+    if (!token) {
+        throw Error("you must be signed in to view details of your account");
+    }
+    const response = await fetch(API + "/users/me", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    if (!response.ok) {
+        const result = await response.json();
+        throw Error(result.message);
+    }
+    return await response.json();
+}
