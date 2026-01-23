@@ -7,7 +7,7 @@ const API = import.meta.env.VITE_API;
 export async function getFaculty() {
     try {
         const response = await fetch(
-            API + "/faculty"
+            API + "/professors"
         );
         const result = await response.json();
         return result;
@@ -21,7 +21,7 @@ export async function getFaculty() {
 
 export async function getFacultyId(id) {
     try {
-        const response = await fetch(API + "/faculty/" + id);
+        const response = await fetch(API + "/professors/" + id);
         const result = await response.json();
         return result;
     } catch (e) {
@@ -35,7 +35,7 @@ export async function getFacultyId(id) {
 export async function getDepartments() {
     try {
         const response = await fetch(
-            API + "/department");
+            API + "/departments");
         const result = await response.json();
         return result;
     } catch (e) {
@@ -46,7 +46,7 @@ export async function getDepartments() {
 
 export async function getDepaertmentId(id) {
     try {
-        const response = await fetch(API + "/department/" + id);
+        const response = await fetch(API + "/departments/" + id);
         const result = await response.json();
         return result;
     } catch (e) {

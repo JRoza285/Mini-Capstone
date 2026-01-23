@@ -1,17 +1,17 @@
-const API = import.meta.env.VITE_API;
+const API = "http://localhost:3000";
 
 // post request to update faculty details
 
 export async function updateFacultyDetails(
     token,
     id,
-    { name, email, bio, department, coverImage }
+    { name, email, bio, department }
 ) {
     if (!token) {
         throw new Error("you must be signed in to update faculty details");
     }
 
-    const response = await fetch(API + "/faculty/" + id, {
+    const response = await fetch(API + "/professors/" + id, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -22,7 +22,6 @@ export async function updateFacultyDetails(
             email,
             bio,
             department,
-            coverImage,
         }),
     });
 
@@ -39,13 +38,13 @@ export async function updateFacultyDetails(
 
 export async function createFacultyMember(
     token,
-    { name, email, bio, department, coverImage }
+    { name, email, bio, department }
 ) {
     if (!token) {
         throw new Error("you must be signed in to create a faculty member");
     }
 
-    const response = await fetch(API + "/faculty", {
+    const response = await fetch(API + "/professors", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -56,7 +55,6 @@ export async function createFacultyMember(
             email,
             bio,
             department,
-            coverImage,
         }),
     });
 
@@ -75,7 +73,7 @@ export async function removeFacultyMember(token, id) {
         throw new Error("You must be signed in to remove a faculty member");
     }
 
-    const response = await fetch(API + "/faculty/" + id, {
+    const response = await fetch(API + "/professors/" + id, {
         method: "DELETE",
         headers: {
             Authorization: "Bearer " + token,
@@ -102,7 +100,7 @@ export async function updateDepartmentDetails(token, id, {
         throw new Error("you must be signed in to update department details");
     }
 
-    const response = await fetch(API + "/department/" + id, {
+    const response = await fetch(API + "/departments/" + id, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -130,7 +128,7 @@ export async function createDepartment(token, { name, description, phone }) {
         throw new Error("you must be signed in to create a department");
     }
 
-    const response = await fetch(API + "/department", {
+    const response = await fetch(API + "/departments", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -145,7 +143,7 @@ export async function createDepartment(token, { name, description, phone }) {
 
     if (!response.ok) {
         const result = await response.json().catch(() => ({}));
-        throw new Error(result.message || "Error creating department");
+        throw new Error(result.message || "Error creating departments");
     }
 
     return await response.json();
@@ -158,7 +156,7 @@ export async function removeDepartment(token, id) {
         throw new Error("You must be signed in to remove a department");
     }
 
-    const response = await fetch(API + "/department/" + id, {
+    const response = await fetch(API + "/departments/" + id, {
         method: "DELETE",
         headers: {
             Authorization: "Bearer " + token,
@@ -167,7 +165,7 @@ export async function removeDepartment(token, id) {
 
     if (!response.ok) {
         const result = await response.json().catch(() => ({}));
-        throw new Error(result.message || "Error removing department");
+        throw new Error(result.message || "Error removing departments");
     }
 
     return true;
