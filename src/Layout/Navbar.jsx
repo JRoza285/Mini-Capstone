@@ -1,21 +1,18 @@
 //contains the navbar with all links
 
-import { NavLink } from "react-router";
-import { useAuth } from "../auth/AuthContext";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../Auth/AuthContext";
 
 export default function Navbar() {
-const {token, logout} = useAuth();
-retun (
+    const { token, logout } = useAuth();
+    return (
     <header>
-        <p>Departments</p>
         <nav>
+            <NavLink to="/home">Home</NavLink>
             <NavLink to="/DepartmentLibrary">All Departments</NavLink>
-        </nav>
-        <p>Faculty</p>
-        <nav>
             <NavLink to="/FacultyLibrary">All Faculty</NavLink>
+            {token ? <button onClick={logout}>Log Out</button> : <NavLink to="/login">Log In</NavLink>}
         </nav>
-
     </header>
 );
 

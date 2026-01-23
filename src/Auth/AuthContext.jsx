@@ -6,11 +6,11 @@ const API = import.meta.env.VITE_API;
 const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const [token, setToken] = useState(
-    localStorage.getItem("token"));
+    const [token, setToken] = useState(
+        localStorage.getItem("token"));
 
     const register = async (credentials) => {
-        const response = await fetch(API + "users/register", {
+        const response = await fetch(API + "/users/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -23,14 +23,15 @@ export default function AuthProvider({ children }) {
             throw Error(result.message);
         }
 
-        setToken(result.token);
-        localStorage.setItem("token", result.token);
-        console.log(token);
+        if (result.token) {
+            setToken(result.token);
+            localStorage.setItem("token", result.token);
+        }
 
         return result;
     };
     const login = async (credentials) => {
-        const response = await fetch(API + "users/login", {
+        const response = await fetch(API + "/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,8 +43,10 @@ export default function AuthProvider({ children }) {
         if (!response.ok) {
             throw Error(result.message);
         }
-        setToken(result.token);
-        localStorage.setItem("token", result.token);
+        if (result.token) {
+            setToken(result.token);
+            localStorage.setItem("token", result.token);
+        }
     };
 
     const logout = () => {
@@ -51,13 +54,13 @@ export default function AuthProvider({ children }) {
         localStorage.removeItem("token");
     };
 
-    const value = { token, register, login, logout  };
+    const value = { token, register, login, logout };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-    }
+}
 
-    export function useAuth() {
-        return useContext(AuthContext);
+export function useAuth() {
+    const context = useContext(AuthContext);
     if (!context) {
         throw new Error("useAuth must be used within an AuthProvider");
     }

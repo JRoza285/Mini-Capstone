@@ -1,11 +1,21 @@
+
+import { Routes, Route } from "react-router-dom";
+import Layout from "./Layout/Layout.jsx";
+import Login from "./Auth/Login.jsx";
+import Register from "./Auth/Register.jsx";
+import LoginHome from "./Auth/LoginHome.jsx";
+import Home from "./Layout/Home.jsx";
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
-    <>
-      <h1>Welcome to FSU</h1>
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/loginhome" element={<LoginHome />} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;
